@@ -23,11 +23,19 @@ export class VoiceController {
         mimeType: data.mimetype
       })
 
+      const outputFormat = data.mimetype.includes('ogg') ? 'ogg' : 'mp3'
+      const contentType = outputFormat === 'ogg' ? 'audio/ogg' : 'audio/mpeg'
+
+      console.log(`[VoiceController] Sending response in ${outputFormat} format`)
+
       return await reply.status(200).send({
         audio: response.audio.toString('base64'),
-        text: response.text
+        text: response.text,
+        format: outputFormat,
+        contentType
       })
     } catch (error: any) {
+      console.error('[VoiceController] Error:', error)
       return await reply.status(500).send({ error: error.message })
     }
   }

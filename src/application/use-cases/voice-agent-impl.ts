@@ -21,7 +21,8 @@ export class VoiceAgent implements IProcessVoiceInteraction {
     console.log(`[VoiceAgent] LLM Response: ${llmResponseText}`)
 
     // 3. Convert LLM response back to speech (TTS)
-    const voiceResponse = await this.voiceService.generateSpeech(llmResponseText)
+    const format = message.mimeType.includes('ogg') ? 'ogg' : 'mp3'
+    const voiceResponse = await this.voiceService.generateSpeech(llmResponseText, format)
 
     return {
       ...voiceResponse,

@@ -36,22 +36,54 @@ export class ElevenLabsVoiceService implements IVoiceService {
     }
   }
 
-  async generateSpeech (text: string): Promise<VoiceResponse> {
-    const voiceId = 'pMs7msYpA7CfSthw3Z43'
+  async generateSpeech (text: string, format: 'mp3' | 'ogg' = 'mp3'): Promise<VoiceResponse> {
+    const voiceId = '21m00Tcm4TlvDq8ikWAM' // Voz "Rachel" (padrão e estável)
+    const modelId = 'eleven_turbo_v2_5' // Modelo mais rápido e compatível
 
-    const response = await this.client.generate({
-      voice: voiceId,
-      text,
-      model_id: 'eleven_multilingual_v2'
-    })
+    try {
+      const outputFormat = format === 'ogg' ? 'ogg_44100_128' : 'mp3_44100_128'
+      console.log(`[ElevenLabs] Attempting format: ${outputFormat} with model: ${modelId}`)
 
+      const response = await this.client.generate({
+        voice: voiceId,
+        text,
+        model_id: modelId,
+        output_format: outputFormat as any
+      })
+
+      return await this.processStreamResponse(response, text)
+    } catch (error: any) {
+      if (error.statusCode === 403 && format === 'ogg') {
+        console.warn('[ElevenLabs] OGG format restricted by plan. Falling back to MP3...')
+        const response = await this.client.generate({
+          voice: voiceId,
+          text,
+          model_id: modelId,
+          output_format: 'mp3_44100_128'
+        })
+        return await this.processStreamResponse(response, text)
+      }
+      console.error('[ElevenLabs] Error in generateSpeech:', error)
+      throw error
+    }
+  }
+
+  private async processStreamResponse (response: any, text: string): Promise<VoiceResponse> {
     const chunks: any[] = []
-    for await (const chunk of response) {
-      chunks.push(chunk)
+    if (Symbol.asyncIterator in Object(response)) {
+      for await (const chunk of response) {
+        chunks.push(chunk)
+      }
+    } else {
+      chunks.push(response)
     }
 
+    const audioBuffer = Buffer.concat(chunks.map(chunk => 
+      Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)
+    ))
+
     return {
-      audio: Buffer.concat(chunks),
+      audio: audioBuffer,
       text
     }
   }
