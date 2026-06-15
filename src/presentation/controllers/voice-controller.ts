@@ -1,28 +1,34 @@
-import { FastifyRequest, FastifyReply } from 'fastify';
-import { IProcessVoiceInteraction } from '../../domain/use-cases/process-voice-interaction';
+import { FastifyRequest, FastifyReply } from 'fastify'
+import { IProcessVoiceInteraction } from '../../domain/use-cases/process-voice-interaction'
 
 export class VoiceController {
-  constructor(private readonly processVoiceInteraction: IProcessVoiceInteraction) {}
+  constructor (private readonly processVoiceInteraction: IProcessVoiceInteraction) {}
 
-  async handle(request: FastifyRequest, reply: FastifyReply) {
+  async handle (request: FastifyRequest, reply: FastifyReply) {
     try {
-      const { audio, mimeType } = request.body as any;
+      const data = await request.file()
 
-      if (!audio) {
-        return reply.status(400).send({ error: 'Audio is required' });
+      if (!data) {
+        return await reply.status(400).send({ error: 'Audio file is required' })
       }
 
-      const response = await this.processVoiceInteraction.execute({
-        audio: Buffer.from(audio, 'base64'),
-        mimeType: mimeType || 'audio/mpeg',
-      });
+      const audioBuffer = await data.toBuffer()
+      
+      // Explicit conversion to base64 as requested, though we'll use the buffer internally
+      const audioBase64 = audioBuffer.toString('base64')
+      console.log(`[VoiceController] Received file: ${data.filename}, converted to base64 (length: ${audioBase64.length})`)
 
-      return reply.status(200).send({
+      const response = await this.processVoiceInteraction.execute({
+        audio: audioBuffer,
+        mimeType: data.mimetype
+      })
+
+      return await reply.status(200).send({
         audio: response.audio.toString('base64'),
-        text: response.text,
-      });
+        text: response.text
+      })
     } catch (error: any) {
-      return reply.status(500).send({ error: error.message });
+      return await reply.status(500).send({ error: error.message })
     }
   }
 }

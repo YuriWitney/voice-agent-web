@@ -1,5 +1,5 @@
-import { VoiceMessage, VoiceResponse } from '../entities/voice-message';
+import { VoiceMessage, VoiceResponse } from '../entities/voice-message'
 
 export interface IProcessVoiceInteraction {
-  execute(message: VoiceMessage): Promise<VoiceResponse>;
+  execute: (message: VoiceMessage) => Promise<VoiceResponse>
 }

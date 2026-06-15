@@ -1,5 +1,5 @@
-import { VoiceMessage } from '../entities/voice-message';
+import { VoiceMessage } from '../entities/voice-message'
 
 export interface ISTTService {
-  transcribe(message: VoiceMessage): Promise<string>;
+  transcribe: (message: VoiceMessage) => Promise<string>
 }
