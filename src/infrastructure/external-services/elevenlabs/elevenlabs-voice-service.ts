@@ -78,7 +78,7 @@ export class ElevenLabsVoiceService implements IVoiceService {
       chunks.push(response)
     }
 
-    const audioBuffer = Buffer.concat(chunks.map(chunk => 
+    const audioBuffer = Buffer.concat(chunks.map(chunk =>
       Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)
     ))
 

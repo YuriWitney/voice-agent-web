@@ -17,6 +17,6 @@ export class GroqLLMService implements ILLMService {
       ]
     })
 
-    return response.choices[0].message.content || ''
+    return response.choices[0].message.content ?? ''
   }
 }

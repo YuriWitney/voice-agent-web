@@ -5,8 +5,8 @@ import { VoiceAgent } from '../../application/use-cases/voice-agent-impl'
 import { VoiceController } from '../../presentation/controllers/voice-controller'
 
 export const makeVoiceController = (): VoiceController => {
-  const elevenLabsApiKey = process.env.ELEVENLABS_API_KEY || ''
-  const groqApiKey = process.env.GROQ_API_KEY || ''
+  const elevenLabsApiKey = process.env.ELEVENLABS_API_KEY ?? ''
+  const groqApiKey = process.env.GROQ_API_KEY ?? ''
 
   const voiceService = new ElevenLabsVoiceService(elevenLabsApiKey)
   const sttService = new GroqSTTService(groqApiKey)

@@ -43,4 +43,13 @@ Este é o backend de um agente de IA speech-to-speech seguindo os princípios de
 
 ## API Endpoints
 
-- `POST /voice-interaction`: Recebe um áudio em base64 e retorna o áudio processado pela ElevenLabs.
+- `POST /voice-interaction`: Processa uma interação de voz e retorna a resposta do agente.
+  - **Opção 1 (Multipart)**: Envie um `multipart/form-data` com um arquivo de áudio no campo `audio`.
+  - **Opção 2 (JSON)**: Envie um `application/json` com o áudio em base64:
+    ```json
+    {
+      "audio": "base64_string...",
+      "mimeType": "audio/mpeg"
+    }
+    ```
+  - **Resposta**: Retorna um JSON contendo o áudio da resposta em base64, o texto transcrito/gerado e informações de formato.

@@ -12,7 +12,7 @@ export class GroqSTTService implements ISTTService {
   async transcribe (message: VoiceMessage): Promise<string> {
     // Groq expects a File-like object with a filename and mimetype
     // We use the 'toFile' helper from the SDK to convert the Buffer
-    const extension = message.mimeType.split('/')[1] || 'mp3'
+    const extension = message.mimeType.split('/')[1] ?? 'mp3'
     const filename = `audio.${extension === 'ogg' || extension === 'opus' ? 'ogg' : 'mp3'}`
 
     const file = await toFile(message.audio, filename, { type: message.mimeType })
