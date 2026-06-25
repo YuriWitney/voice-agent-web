@@ -3,6 +3,7 @@ import { VoiceMessage, VoiceResponse } from '../../domain/entities/voice-message
 import { IVoiceService } from '../../domain/services/voice-service'
 import { ISTTService } from '../../domain/services/stt-service'
 import { ILLMService } from '../../domain/services/llm-service'
+import { logger } from '../../infrastructure/logger/logger'
 
 export class VoiceAgent implements IProcessVoiceInteraction {
   constructor (
@@ -14,11 +15,11 @@ export class VoiceAgent implements IProcessVoiceInteraction {
   async execute (message: VoiceMessage): Promise<VoiceResponse> {
     // 1. Transcribe voice to text
     const transcribedText = await this.sttService.transcribe(message)
-    console.log(`[VoiceAgent] Transcribed: ${transcribedText}`)
+    logger.info(`[VoiceAgent] Transcribed: ${transcribedText}`)
 
     // 2. Get LLM response
     const llmResponseText = await this.llmService.chat(transcribedText)
-    console.log(`[VoiceAgent] LLM Response: ${llmResponseText}`)
+    logger.info(`[VoiceAgent] LLM Response: ${llmResponseText}`)
 
     // 3. Convert LLM response back to speech (TTS)
     const format = message.mimeType.includes('ogg') ? 'ogg' : 'mp3'

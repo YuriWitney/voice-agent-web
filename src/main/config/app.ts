@@ -2,8 +2,9 @@
 import fastify from 'fastify'
 import multipart from '@fastify/multipart'
 import { makeVoiceController } from '../factories/voice-factory'
+import { logger } from '../../infrastructure/logger/logger'
 
-const app = fastify({ logger: true })
+const app = fastify({ loggerInstance: logger })
 
 app.register(multipart, {
   limits: {

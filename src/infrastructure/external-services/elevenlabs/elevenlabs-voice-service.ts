@@ -5,6 +5,7 @@ import {
   VoiceResponse
 } from '../../../domain/entities/voice-message'
 import { Readable } from 'stream'
+import { logger } from '../../logger/logger'
 
 export class ElevenLabsVoiceService implements IVoiceService {
   private readonly client: ElevenLabsClient
@@ -42,7 +43,7 @@ export class ElevenLabsVoiceService implements IVoiceService {
 
     try {
       const outputFormat = format === 'ogg' ? 'ogg_44100_128' : 'mp3_44100_128'
-      console.log(`[ElevenLabs] Attempting format: ${outputFormat} with model: ${modelId}`)
+      logger.info(`[ElevenLabs] Attempting format: ${outputFormat} with model: ${modelId}`)
 
       const response = await this.client.generate({
         voice: voiceId,
@@ -54,7 +55,7 @@ export class ElevenLabsVoiceService implements IVoiceService {
       return await this.processStreamResponse(response, text)
     } catch (error: any) {
       if (error.statusCode === 403 && format === 'ogg') {
-        console.warn('[ElevenLabs] OGG format restricted by plan. Falling back to MP3...')
+        logger.warn('[ElevenLabs] OGG format restricted by plan. Falling back to MP3...')
         const response = await this.client.generate({
           voice: voiceId,
           text,
@@ -63,7 +64,7 @@ export class ElevenLabsVoiceService implements IVoiceService {
         })
         return await this.processStreamResponse(response, text)
       }
-      console.error('[ElevenLabs] Error in generateSpeech:', error)
+      logger.error(error, '[ElevenLabs] Error in generateSpeech')
       throw error
     }
   }
