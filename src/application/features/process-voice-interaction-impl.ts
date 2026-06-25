@@ -1,5 +1,5 @@
-import { IProcessVoiceInteraction } from '../../domain/use-cases/process-voice-interaction'
-import { VoiceMessage, VoiceResponse } from '../../domain/entities/voice-message'
+import { IProcessVoiceInteraction } from '../../interfaces/application/IProcess-Voice-Interaction'
+import { VoiceMessage, VoiceResponse } from '../../interfaces/application/IVoiceTypes'
 import { IVoiceService } from '../../domain/services/voice-service'
 
 export class ProcessVoiceInteraction implements IProcessVoiceInteraction {

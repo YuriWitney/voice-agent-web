@@ -1,7 +1,7 @@
-import { ElevenLabsVoiceService } from '../../infrastructure/external-services/elevenlabs/elevenlabs-voice-service'
-import { GroqSTTService } from '../../infrastructure/external-services/groq/groq-stt-service'
-import { GroqLLMService } from '../../infrastructure/external-services/groq/groq-llm-service'
-import { VoiceAgent } from '../../application/use-cases/voice-agent-impl'
+import { ElevenLabsVoiceService } from '../../infra/external-services/elevenlabs/elevenlabs-voice-service'
+import { GroqSTTService } from '../../infra/external-services/groq/groq-stt-service'
+import { GroqLLMService } from '../../infra/external-services/groq/groq-llm-service'
+import { VoiceAgent } from '../../application/features/voice-agent-impl'
 import { VoiceController } from '../../presentation/controllers/voice-controller'
 
 export const makeVoiceController = (): VoiceController => {

@@ -1,9 +1,9 @@
-import { IProcessVoiceInteraction } from '../../domain/use-cases/process-voice-interaction'
-import { VoiceMessage, VoiceResponse } from '../../domain/entities/voice-message'
+import { IProcessVoiceInteraction } from '../../interfaces/application/IProcess-Voice-Interaction'
+import { VoiceMessage, VoiceResponse } from '../../interfaces/application/IVoiceTypes'
 import { IVoiceService } from '../../domain/services/voice-service'
 import { ISTTService } from '../../domain/services/stt-service'
 import { ILLMService } from '../../domain/services/llm-service'
-import { logger } from '../../infrastructure/logger/logger'
+import { logger } from '../../infra/logger/logger'
 
 export class VoiceAgent implements IProcessVoiceInteraction {
   constructor (

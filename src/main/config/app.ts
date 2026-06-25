@@ -2,7 +2,7 @@
 import fastify from 'fastify'
 import multipart from '@fastify/multipart'
 import { makeVoiceController } from '../factories/voice-factory'
-import { logger } from '../../infrastructure/logger/logger'
+import { logger } from '../../infra/logger/logger'
 
 const app = fastify({ loggerInstance: logger })
 

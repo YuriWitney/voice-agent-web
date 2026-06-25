@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { FastifyRequest, FastifyReply } from 'fastify'
 import '@fastify/multipart'
-import { IProcessVoiceInteraction } from '../../domain/use-cases/process-voice-interaction'
-import { logger } from '../../infrastructure/logger/logger'
+import { IProcessVoiceInteraction } from '../../interfaces/application/IProcess-Voice-Interaction'
+import { logger } from '../../infra/logger/logger'
 
 export class VoiceController {
   constructor (private readonly processVoiceInteraction: IProcessVoiceInteraction) {}
