@@ -1,9 +1,9 @@
 import { ElevenLabsClient } from 'elevenlabs'
-import { IVoiceService } from '../../../domain/services/voice-service'
+import { IVoiceService } from '../../../interfaces/services/voice-service'
 import {
   VoiceMessage,
   VoiceResponse
-} from '../../../domain/entities/voice-message'
+} from '../../../interfaces/application/IVoiceMessage'
 import { Readable } from 'stream'
 import { logger } from '../../logger/logger'
 

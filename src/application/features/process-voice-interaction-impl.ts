@@ -1,6 +1,6 @@
 import { IProcessVoiceInteraction } from '../../interfaces/application/IProcess-Voice-Interaction'
-import { VoiceMessage, VoiceResponse } from '../../interfaces/application/IVoiceTypes'
-import { IVoiceService } from '../../domain/services/voice-service'
+import { VoiceMessage, VoiceResponse } from '../../interfaces/application/IVoiceMessage'
+import { IVoiceService } from '../../interfaces/services/voice-service'
 
 export class ProcessVoiceInteraction implements IProcessVoiceInteraction {
   constructor (private readonly voiceService: IVoiceService) {}

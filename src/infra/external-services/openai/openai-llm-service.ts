@@ -1,5 +1,5 @@
 import OpenAI from 'openai'
-import { ILLMService } from '../../../domain/services/llm-service'
+import { ILLMService } from '../../../interfaces/services/llm-service'
 
 export class OpenAILLMService implements ILLMService {
   private readonly client: OpenAI

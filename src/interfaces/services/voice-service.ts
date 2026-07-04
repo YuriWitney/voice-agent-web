@@ -1,4 +1,4 @@
-import { VoiceMessage, VoiceResponse } from '../entities/voice-message'
+import { VoiceMessage, VoiceResponse } from '../application/IVoiceMessage'
 
 export interface IVoiceService {
   processSpeechToSpeech: (message: VoiceMessage) => Promise<VoiceResponse>

@@ -1,6 +1,6 @@
 import Groq, { toFile } from 'groq-sdk'
-import { ISTTService } from '../../../domain/services/stt-service'
-import { VoiceMessage } from '../../../domain/entities/voice-message'
+import { ISTTService } from '../../../interfaces/services/stt-service'
+import { VoiceMessage } from '../../../interfaces/application/IVoiceMessage'
 
 export class GroqSTTService implements ISTTService {
   private readonly client: Groq

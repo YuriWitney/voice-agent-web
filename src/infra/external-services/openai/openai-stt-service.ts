@@ -1,6 +1,6 @@
 import OpenAI, { toFile } from 'openai'
-import { ISTTService } from '../../../domain/services/stt-service'
-import { VoiceMessage } from '../../../domain/entities/voice-message'
+import { ISTTService } from '../../../interfaces/services/stt-service'
+import { VoiceMessage } from '../../../interfaces/application/IVoiceMessage'
 
 export class OpenAISTTService implements ISTTService {
   private readonly client: OpenAI

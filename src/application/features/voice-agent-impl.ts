@@ -1,8 +1,8 @@
 import { IProcessVoiceInteraction } from '../../interfaces/application/IProcess-Voice-Interaction'
-import { VoiceMessage, VoiceResponse } from '../../interfaces/application/IVoiceTypes'
-import { IVoiceService } from '../../domain/services/voice-service'
-import { ISTTService } from '../../domain/services/stt-service'
-import { ILLMService } from '../../domain/services/llm-service'
+import { VoiceMessage, VoiceResponse } from '../../interfaces/application/IVoiceMessage'
+import { IVoiceService } from '../../interfaces/services/voice-service'
+import { ISTTService } from '../../interfaces/services/stt-service'
+import { ILLMService } from '../../interfaces/services/llm-service'
 import { logger } from '../../infra/logger/logger'
 
 export class VoiceAgent implements IProcessVoiceInteraction {

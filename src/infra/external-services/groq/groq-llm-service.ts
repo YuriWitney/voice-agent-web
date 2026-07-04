@@ -1,5 +1,5 @@
 import Groq from 'groq-sdk'
-import { ILLMService } from '../../../domain/services/llm-service'
+import { ILLMService } from '../../../interfaces/services/llm-service'
 
 export class GroqLLMService implements ILLMService {
   private readonly client: Groq
