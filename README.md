@@ -1,6 +1,6 @@
 # Voice Agent Web Backend
 
-Este é o backend de um agente de IA speech-to-speech seguindo os princípios de **Clean Architecture** e **Clean Code**.
+Este é o backend de um agente de IA speech-to-speech seguindo os princípios de **Clean Architecture** e **Clean Code**
 
 ## Estrutura do Projeto
 
