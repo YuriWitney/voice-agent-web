@@ -3,7 +3,7 @@ name: CD - Deploy Voice Agent Backend
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
