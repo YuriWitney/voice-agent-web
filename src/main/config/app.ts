@@ -17,4 +17,8 @@ app.post('/voice-interaction', async (request, reply) => {
   return await controller.handle(request, reply)
 })
 
+app.get('/health', async (request, reply) => {
+  return { status: 'ok' }
+})
+
 export { app }

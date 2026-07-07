@@ -7,5 +7,13 @@
     "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
     "strictNullChecks": true,
     "resolveJsonModule": true
-  }
+  },
+  "include": [
+    "./src/**/*.ts",
+    "__tests__/**/*.ts"
+  ],
+  "exclude": [
+    "./node_modules/*",
+    "dist"
+  ]
 }
